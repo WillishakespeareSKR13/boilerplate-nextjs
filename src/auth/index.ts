@@ -1,11 +1,11 @@
 import DEFAULT from './DEFAULT';
 import LOGIN from './LOGIN';
-import PUBLIC from './PUBLIC';
+import ADMIN from './ADMIN';
 
 const TypeLogin = {
   LOGIN,
   DEFAULT,
-  PUBLIC
+  ADMIN
 };
 
 export default TypeLogin;

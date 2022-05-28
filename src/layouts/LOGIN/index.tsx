@@ -6,9 +6,12 @@ type Props = {
   Role?: string | string[];
 };
 
-const AdminLayout: FC<Props> = ({ children }) => (
-  <AuthContext type="LOGIN">
-    <LayoutAnimation>{children}</LayoutAnimation>
-  </AuthContext>
-);
+const AdminLayout: FC<Props> = (props) => {
+  const { children } = props;
+  return (
+    <AuthContext>
+      <LayoutAnimation>{children}</LayoutAnimation>
+    </AuthContext>
+  );
+};
 export default AdminLayout;

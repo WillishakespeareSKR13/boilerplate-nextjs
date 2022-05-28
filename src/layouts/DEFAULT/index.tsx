@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { LayoutAnimation } from '@sweetsyui/ui';
-
+import LayoutAnimation from '@sweetsyui/ui/build/@layouts/LayoutAnimation';
 import AuthContext from '@Src/hooks/authContext';
 
 type Props = {
@@ -8,12 +7,8 @@ type Props = {
 };
 
 const DefaultLayout: FC<Props> = ({ children }) => (
-  <AuthContext type="DEFAULT">
-    <LayoutAnimation
-      margin="90px 0 0 0"
-      minHeight="calc(100vh - 90px)"
-      justifyContent="flex-start"
-    >
+  <AuthContext>
+    <LayoutAnimation margin="80px 0 0 0" minHeight="calc(100% - 80px)">
       {children}
     </LayoutAnimation>
   </AuthContext>

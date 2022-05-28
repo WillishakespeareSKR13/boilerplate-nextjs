@@ -3,23 +3,12 @@ import {
   AtomButton,
   AtomInput,
   AtomLink,
-  AtomLoader,
   AtomText,
   AtomWrapper
 } from '@sweetsyui/ui';
 import { NextPageFC } from 'next';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation } from '@apollo/client';
-import { LOGIN } from '@Apollo/mutation';
-import { useAlert } from '@Src/hooks/alertContext';
-import { v4 as uuidv4 } from 'uuid';
-import cookie from 'js-cookie';
-import { IMutationFilter } from 'graphql';
-import { useDispatch } from 'react-redux';
-import { SetUser } from '@Redux/actions/user';
-import { initialState } from '@Redux/reducer/user';
-import { useRouter } from 'next/router';
 
 const initialValues = {
   email: '',
@@ -27,9 +16,6 @@ const initialValues = {
 };
 
 const PageLogin: NextPageFC = () => {
-  const { insertAlert } = useAlert();
-  const dispatch = useDispatch();
-  const router = useRouter();
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({
@@ -39,44 +25,12 @@ const PageLogin: NextPageFC = () => {
       password: Yup.string().required('Por favor, ingrese una contraseña')
     }),
     onSubmit: async (valores) => {
-      LoginMutation({
-        variables: {
-          input: {
-            token: false,
-            login: valores.email,
-            password: valores.password
-          }
-        }
-      });
-    }
-  });
-
-  const [LoginMutation, { data, loading }] = useMutation<
-    IMutationFilter<'login'>
-  >(LOGIN, {
-    onError: (error) => {
-      insertAlert({
-        id: uuidv4(),
-        type: 'error',
-        message: error.message
-      });
-    },
-    onCompleted: (data) => {
-      const { login } = data;
-      const me = login.me || initialState;
-      cookie.set('bearer', `${login.bearer}`);
-      dispatch(SetUser(me));
-      router.reload();
+      console.warn(valores);
     }
   });
 
   return (
     <>
-      <AtomLoader
-        isLoading={data !== undefined || loading}
-        colorLoading="#00abb9"
-        backgroundColor="#00000010"
-      />
       <AtomWrapper
         minHeight="calc(100vh - 90px)"
         maxWidth="1440px"
